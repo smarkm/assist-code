@@ -14,6 +14,17 @@
 	${false}
 );</template><template autoinsert="false" context="javaScript" deleted="false" description="arrow function" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.arrow" name="arrow">${param} =&gt; ${output}</template><template autoinsert="false" context="javaScript" deleted="false" description="arrow function" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.arrowfunction" name="arrowfunction">(${params}) =&gt; {
 	
+}</template><template autoinsert="true" context="javaScript" deleted="false" description="Convert byte 2 readable value" enabled="true" name="byte2Readable">function byte2Readable(value,unit){&#13;
+	switch (unit) {&#13;
+	case "k","K":&#13;
+		return value/1024;&#13;
+	case "m","M":&#13;
+		return value/1024/1024;&#13;
+	case "G","g":&#13;
+		return value/1024/1024/1024;&#13;
+	default:&#13;
+		return value;&#13;
+	}&#13;
 }</template><template autoinsert="false" context="javaScript" deleted="false" description="catch block" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.catch" name="catch">catch (e) {
 	// ${todo}: handle exception${cursor}
 }</template><template autoinsert="false" context="javaScript" deleted="false" description="class declaration" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.class" name="class">class ${ClassName} {
@@ -28,7 +39,26 @@
 	${cursor}
 }</template><template autoinsert="false" context="javaScript" deleted="false" description="else if block" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.elseif" name="elseif">else if (${condition}) {
 	${cursor}
-}</template><template autoinsert="true" context="jsdoc" deleted="false" description="&lt;code&gt;false&lt;/code&gt;" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.code_tag_false" name="false">&lt;code&gt;false&lt;/code&gt;</template><template autoinsert="false" context="javaScript" deleted="false" description="iterate over array" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.for_array" name="for">for (var ${index} = 0; ${index} &lt; ${array}.length; ${index}++) {
+}</template><template autoinsert="true" context="jsdoc" deleted="false" description="&lt;code&gt;false&lt;/code&gt;" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.code_tag_false" name="false">&lt;code&gt;false&lt;/code&gt;</template><template autoinsert="true" context="javaScript" deleted="false" description="Date format function" enabled="true" name="fdateFormat">Date.prototype.format = function(fmt) { &#13;
+     var o = { &#13;
+        "M+" : this.getMonth()+1,                 //月份 &#13;
+        "d+" : this.getDate(),                    //日 &#13;
+        "h+" : this.getHours(),                   //小时 &#13;
+        "m+" : this.getMinutes(),                 //分 &#13;
+        "s+" : this.getSeconds(),                 //秒 &#13;
+        "q+" : Math.floor((this.getMonth()+3)/3), //季度 &#13;
+        "S"  : this.getMilliseconds()             //毫秒 &#13;
+    }; &#13;
+    if(/(y+)/.test(fmt)) {&#13;
+            fmt=fmt.replace(RegExp.$$1, (this.getFullYear()+"").substr(4 - RegExp.$$1.length)); &#13;
+    }&#13;
+     for(var k in o) {&#13;
+        if(new RegExp("("+ k +")").test(fmt)){&#13;
+             fmt = fmt.replace(RegExp.$$1, (RegExp.$$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));&#13;
+         }&#13;
+     }&#13;
+    return fmt; &#13;
+}</template><template autoinsert="false" context="javaScript" deleted="false" description="iterate over array" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.for_array" name="for">for (var ${index} = 0; ${index} &lt; ${array}.length; ${index}++) {
 	${line_selection}${cursor}
 }</template><template autoinsert="false" context="javaScript" deleted="false" description="iterate over array with temporary variable" enabled="true" id="org.eclipse.wst.jsdt.ui.templates.for_temp" name="for">for (var ${index} = 0; ${index} &lt; ${array}.length; ${index}++) {
 	var ${array_element} = ${array}[${index}];
